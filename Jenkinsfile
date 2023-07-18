@@ -19,25 +19,28 @@ pipeline {
                 }
             }
         }
+
         stage("build jar") {
             steps {
-                script{
+                script {
                     buildJar()
                 }
             }
         }
+
         stage("build and push image") {
             steps {
-                script{
+                script {
                     buildImage 'nanatwn/demo-app:jma-3.0'
                     dockerLogin()
                     dockerPush 'nanatwn/demo-app:jma-3.0'
                 }
             }
         }
+        
         stage("deploy") {
             steps {
-                script{
+                script {
                     gv.deployApp()
                 }
             }
